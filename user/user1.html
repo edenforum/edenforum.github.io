@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/profile.css" />
+<div id="background-gradient"></div>
+
+<header>
+  <!-- replace the h1 with a logo image later -->
+  <h1><img src="/icons/edenforum.png"></h1>
+  <nav>
+    <li><img src="/icons/info.png"> <a href="#">info</a></li>
+    <li><img src="/icons/music.png"> <a href="#">music</a></li>
+    <li><img src="/icons/home.png"> <a href="/index.html">home</a></li>
+  </nav>
+</header>
+
+
+<main>
+    <p class="wavy">the date and time is: <span id="datetime"></span>...</p>
+    <script>
+    // date and time
+    function updateTime() {
+        var now = new Date();
+        var datetime = now.toLocaleString();
+        document.getElementById("datetime").innerHTML = datetime;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+    </script>
+
+<article>
+  <nav>
+      <a onclick="history.back()">back</a>
+      <time>creation date: 05/05/2001</time>
+  </nav>
+
+  <section>
+      <a href="/user/user1.html">
+          <aside>
+              <img src="/icons/pfp.png">
+              <span class="user-name">user1</span>
+          </aside>
+      </a>
+
+      <p>hi :) just testing out the profiles. i think they look nice :)</p>
+  </section>
+
+  <section>
+      <p>
+      this user has no pinned posts.
+  </p>
+  </section>
+
+</article>
