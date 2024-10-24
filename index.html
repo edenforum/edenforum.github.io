@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="css/main.css" />
+
+<div id="background-gradient"></div>
+
+<header>
+  <!-- replace the h1 with a logo image later -->
+  <h1><img src="/icons/edenforum.png"></h1>
+  <nav>
+    <li><img src="/icons/info.png"> <a href="#">info</a></li>
+    <li><img src="/icons/music.png"> <a href="#">music</a></li>
+    <li><img src="/icons/home.png"> <a href="/index.html">home</a></li>
+  </nav>
+</header>
+
+
+<main>
+    
+    <p class="wavy">the date and time is: <span id="datetime"></span>...</p>
+    <script>
+    // date and time
+    function updateTime() {
+      var now = new Date();
+      var datetime = now.toLocaleString();
+      document.getElementById("datetime").innerHTML = datetime;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+    </script>
+  <table>
+    <thead>
+      <th>new</th>
+      <th>title</th>
+      <th>date posted</th>
+      <th>comments</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><img src="/icons/post_new.png"></td>
+        <td><a href="/post/album.html">album</a></td>
+        <td>10/20/2024 | 13:37</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td><img src="/icons/post_new.png"></td>
+        <td><a href="/post/signups.html">sign ups are disabled</a></td>
+        <td>05/07/2024 | 01:01</td>
+        <td>&infin;</td>
+      </tr>
+      <tr>
+        <td><img src="/icons/post_new.png"></td>
+        <td><a href="/post/welcome.html">welcome to edenforum!</a></td>
+        <td>05/05/2024 | 16:20</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td><img src="/icons/post_viewed.png"></td>
+        <td><a href="/post/test.html">test post</a></td>
+        <td>05/05/2001 | 01:10</td>
+        <td>5</td>
+      </tr>
+    </tbody>
+  </table>
+</main>

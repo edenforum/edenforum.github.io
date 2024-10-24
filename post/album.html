@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/post.css" />
+
+<div id="background-gradient"></div>
+
+<header>
+  <!-- replace the h1 with a logo image later -->
+  <h1><img src="/icons/edenforum.png"></h1>
+  <nav>
+    <li><img src="/icons/info.png"> <a href="#">info</a></li>
+    <li><img src="/icons/music.png"> <a href="#">music</a></li>
+    <li><img src="/icons/home.png"> <a href="/index.html">home</a></li>
+  </nav>
+</header>
+
+
+<main>
+    <p class="wavy">the date and time is: <span id="datetime"></span>...</p>
+    <script>
+    // date and time
+    function updateTime() {
+        var now = new Date();
+        var datetime = now.toLocaleString();
+        document.getElementById("datetime").innerHTML = datetime;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+    </script>
+
+    <article>
+        <nav>
+            <a href="/index.html">back</a>
+            <h2>album</h2>
+            <time>10/20/2024</time>
+        </nav>
+
+        <section>
+            <a href="/profile/user1.html">
+                <aside>
+                    <img src="/icons/pfp.png">
+                    <span class="user-name">edenforum</span>
+                </aside>
+            </a>
+
+            <p> 1. TURN ON VPN <br>2. STREAM 'EDENFORUM' ON ALL DEVICES
+            <br> 3. TURN DOWN VOLUME
+            <br> 4. GO TO SLEEP <br><br>
+            <a href="https://too.fm/homee"><img src="\icons\embeds\cover.png", height="600";></a></p>
+        </section>
+
+        <section>
+            <p>
+            <a href="#">sign up</a> to post a reply.
+        </p>
+        </section>
+
+    </article>
+</main>

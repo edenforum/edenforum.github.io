@@ -1,0 +1,135 @@
+:root {
+  --blue: #e8c8f0;
+  --blue-2: #7c8bff;
+  
+  --pink: #fedeff64;
+}
+
+html {
+  cursor:url(/icons/cursors/default_arrow.cur),auto;
+  
+  font-family: serif;
+  font-size: 1rem;
+  background-image: url(/icons/marble.png);
+}
+#background-gradient {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-image: linear-gradient( rgba(255, 193, 229, 0.598)1%, rgba(200, 219, 224, 0.326));
+}
+
+.wavy {
+  color: #f7a0f38f;
+  filter: drop-shadow(15px 15px 0px #ff2aca) drop-shadow(-15px -15px 0px #ff93e463);
+}
+body > header, main {
+  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1em;
+  opacity: 100%;
+  filter:drop-shadow(15px 15px 7px #a968996e);
+}
+li, a {
+  cursor:url(/icons/cursors/default_point.cur),pointer;
+}
+/* top bar */
+header {
+  display: flex;
+  justify-content: space-between;
+}
+header h1 {
+  margin: 0;
+}
+main {
+  opacity:100%;
+}
+header img {
+  height: 2em;
+}
+nav {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+}
+nav > li {
+  list-style: none;
+  display: inline-flex;
+  gap: 1em;
+  align-items: center;
+}
+nav img {
+  height: 1.6em;
+
+}
+
+/* links outside the header */
+main a {
+
+  color: var(--blue-2); /* custom blue :) */
+  text-decoration: none; /* dont underline */
+  
+
+  &:hover {
+    cursor:url(/icons/cursors/default_point.cur),pointer;
+    color: var(--blue-2);
+    text-decoration: underline;
+  }
+}
+
+table {
+  width: 100%;
+  border-spacing: 1px; /* gaps between table cells = white lines */
+  color: white; /* make the text on the table white */
+}
+thead {
+  background-color: var(--blue);
+}
+tbody {
+  background-color: var(--pink);
+}
+th,
+td {
+  padding: 0.5em; /* make the items tall */
+  text-align: center;
+  color: rgb(207, 121, 181);
+}
+table img {
+  height: 2em;
+}
+
+body > header, post {
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 100%;
+  filter:drop-shadow(15px 15px 7px #a968996e);
+}
+
+/* top bar */
+header {
+  display: flex;
+  justify-content: space-between;
+}
+post {
+  max-width: 800px;
+  opacity:100%;
+}
+header img {
+  height: 2em;
+}
+nav {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+}
+nav > li {
+  list-style: none;
+}
+nav img {
+  height: 1.6em;
+
+}
+
