@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="css/main.css" />
-
 <div id="background-gradient"></div>
-
+<!-- audio -->
+<script>
+  function play() {
+    var audio = document.getElementById("audio");
+    audio.volume = 0.2;
+    audio.play();
+  }
+</script>
+<audio id="audio" src="/sounds/weatherchannel.wav"></audio>
 <header>
-  <!-- replace the h1 with a logo image later -->
   <h1><img src="/icons/edenforum.png"></h1>
   <nav>
     <li><img src="/icons/info.png"> <a href="#">info</a></li>
-    <li><img src="/icons/music.png"> <a href="#">music</a></li>
+    <li><img src="/icons/music.png" type="button" value="PLAY" onclick="play()"> <a href="#">music</a></li>
     <li><img src="/icons/home.png"> <a href="/index.html">home</a></li>
   </nav>
 </header>
