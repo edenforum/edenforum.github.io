@@ -52,3 +52,139 @@ section aside {
         color: var(--blue2);
     }
 }
+/*main.css clone*/
+:root {
+    --blue-2: #ff0000;
+  }
+  
+  html {
+    cursor:url(/icons/cursors/default_arrow.cur),auto;
+    background-image: url(/icons/elbram.png);
+    font-family: serif;
+    font-size: 1rem;
+    
+  }
+  #background-gradient {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.021)1%, rgb(0, 0, 0));
+  }
+  
+  .wavy {
+    color: #8d24248f;
+    filter: drop-shadow(15px 15px 0px #ffffff) drop-shadow(-15px -15px 0px #36363663);
+  }
+  body > header, main {
+    
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em;
+    opacity: 100%;
+    filter:drop-shadow(15px 15px 7px #0000006e);
+  }
+  li, a {
+    cursor:url(/icons/cursors/default_point.cur),pointer;
+  }
+  a{
+    color:#ff6d6d;
+  }
+  /* top bar */
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+  header h1 {
+    margin: 0;
+  }
+  main {
+    opacity:100%;
+  }
+  header img {
+    height: 2em;
+  }
+  nav {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+  }
+  nav > li {
+    list-style: none;
+    display: inline-flex;
+    gap: 1em;
+    align-items: center;
+  }
+  nav img {
+    height: 1.6em;
+  
+  }
+  
+  /* links outside the header */
+  main a {
+  
+    color: var(--blue-2); /* custom blue :) */
+    text-decoration: none; /* dont underline */
+    
+  
+    &:hover {
+      cursor:url(/icons/cursors/default_point.cur),pointer;
+      color: var(--blue-2);
+      text-decoration: underline;
+    }
+  }
+  
+  table {
+    width: 100%;
+    border-spacing: 1px; /* gaps between table cells = white lines */
+    color: white; /* make the text on the table white */
+  }
+  thead {
+    background-color: var(--blue);
+  }
+  tbody {
+    background-color: var(--pink);
+  }
+  th,
+  td {
+    padding: 0.5em; /* make the items tall */
+    text-align: center;
+  }
+  table img {
+    height: 2em;
+  }
+  
+  body > header, post {
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 100%;
+    filter:drop-shadow(15px 15px 7px #0000006e);
+  }
+  
+  /* top bar */
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+  post {
+    max-width: 800px;
+    opacity:100%;
+  }
+  header img {
+    height: 2em;
+  }
+  nav {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+  }
+  nav > li {
+    list-style: none;
+  }
+  nav img {
+    height: 1.6em;
+  
+  }
+  
+  
