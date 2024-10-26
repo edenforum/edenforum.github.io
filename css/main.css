@@ -132,4 +132,13 @@ nav img {
   height: 1.6em;
 
 }
+h4 {
+  padding:1em;
+  text-align: center;
+  justify-content: space-around;
+  color:rgb(207, 121, 181);
+  font-weight:normal;
+}
+
+
 
