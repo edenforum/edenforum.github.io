@@ -18,7 +18,7 @@ html {
   height: 100vh;
   left: 0;
   top: 0;
-  background-image: linear-gradient( rgba(255, 193, 229, 0.598)1%, rgba(200, 219, 224, 0.326));
+  background-image: linear-gradient( rgba(255, 193, 229, 0.598)1%, #fde9ffb8);
 }
 p.dt1 {
   margin: 0;

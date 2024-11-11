@@ -25,29 +25,29 @@
 
 
 <main>
-  <div class="wavy">
-    <p class="dt3">the date and time is: <span id="datetime3">10/26/2024, 7:42:13 PM</span>...</p>
-    <p class="dt2">the date and time is: <span id="datetime2">10/26/2024, 7:42:13 PM</span>...</p>
-    <p class="dt1">the date and time is: <span id="datetime">10/26/2024, 7:42:13 PM</span>...</p>
-  </div>
-  <script>
-  // date and time
-  let datetime;
-  let delay = 150;
-  function updateTime() {
-    var now = new Date();
-    datetime = now.toLocaleString();
-    document.getElementById("datetime").innerHTML = datetime;
-    setTimeout(() => {
-      document.getElementById("datetime2").innerHTML = datetime;
+<div class="wavy">
+      <p class="dt3">the date and time is: <span id="datetime3">10/26/2024, 7:42:13 PM</span>...</p>
+      <p class="dt2">the date and time is: <span id="datetime2">10/26/2024, 7:42:13 PM</span>...</p>
+      <p class="dt1">the date and time is: <span id="datetime">10/26/2024, 7:42:13 PM</span>...</p>
+    </div>
+    <script>
+    // date and time
+    let datetime;
+    let delay = 150;
+    function updateTime() {
+      var now = new Date();
+      datetime = now.toLocaleString();
+      document.getElementById("datetime").innerHTML = datetime;
       setTimeout(() => {
-        document.getElementById("datetime3").innerHTML = datetime;
+        document.getElementById("datetime2").innerHTML = datetime;
+        setTimeout(() => {
+          document.getElementById("datetime3").innerHTML = datetime;
+        }, delay);
       }, delay);
-    }, delay);
-  }
-  updateTime();
-  setInterval(updateTime, 1000);
-  </script>
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+    </script>
   <table>
     <thead>
       <th>new</th>

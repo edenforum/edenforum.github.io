@@ -27,18 +27,29 @@
 
 
 <main>
-    <p class="wavy">the date and time is: <span id="datetime"></span>...</p>
-    <script>
-    // date and time
-    function updateTime() {
-        var now = new Date();
-        var datetime = now.toLocaleString();
-        document.getElementById("datetime").innerHTML = datetime;
-    }
-    updateTime();
-    setInterval(updateTime, 1000);
-    </script>
-
+  <div class="wavy">
+    <p class="dt3">the date and time is: <span id="datetime3">10/26/2024, 7:42:13 PM</span>...</p>
+    <p class="dt2">the date and time is: <span id="datetime2">10/26/2024, 7:42:13 PM</span>...</p>
+    <p class="dt1">the date and time is: <span id="datetime">10/26/2024, 7:42:13 PM</span>...</p>
+  </div>
+  <script>
+  // date and time
+  let datetime;
+  let delay = 150;
+  function updateTime() {
+    var now = new Date();
+    datetime = now.toLocaleString();
+    document.getElementById("datetime").innerHTML = datetime;
+    setTimeout(() => {
+      document.getElementById("datetime2").innerHTML = datetime;
+      setTimeout(() => {
+        document.getElementById("datetime3").innerHTML = datetime;
+      }, delay);
+    }, delay);
+  }
+  updateTime();
+  setInterval(updateTime, 1000);
+  </script>
 <article>
   <nav>
       <a onclick="history.back()">back</a>
@@ -48,7 +59,7 @@
   <section>
       <a href="/user/user1.html">
           <aside>
-              <img src="/icons/pfp.png">
+              <img src="/icons/user1.png">
               <span class="user-name">user1</span>
           </aside>
       </a>
