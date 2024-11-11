@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/post.css" />
+<head>
+    <title>edenforum</title>
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
+</head>
+<div id="background-gradient"></div>
+
+<!-- audio -->
+<script>
+    function play() {
+      var audio = document.getElementById("audio");
+      audio.volume = 0.2;
+      audio.play();
+    }
+  </script>
+  <audio id="audio" src="/sounds/weatherchannel.wav"></audio>
+  <header>
+    <h1><img src="/icons/edenforum.png"></h1>
+    <nav>
+      <li><img src="/icons/info.png"> <a href="#">info</a></li>
+      <li><img src="/icons/music.png" type="button" value="PLAY" onclick="play()"> <a href="/post/album.html">music</a></li>
+      <li><img src="/icons/home.png"> <a href="/index.html">home</a></li>
+    </nav>
+  </header>
+
+
+<main>
+    <div class="wavy">
+        <p class="dt3">the date and time is: <span id="datetime3">10/26/2024, 7:42:13 PM</span>...</p>
+        <p class="dt2">the date and time is: <span id="datetime2">10/26/2024, 7:42:13 PM</span>...</p>
+        <p class="dt1">the date and time is: <span id="datetime">10/26/2024, 7:42:13 PM</span>...</p>
+      </div>
+      <script>
+      // date and time
+      let datetime;
+      let delay = 150;
+      function updateTime() {
+        var now = new Date();
+        datetime = now.toLocaleString();
+        document.getElementById("datetime").innerHTML = datetime;
+        setTimeout(() => {
+          document.getElementById("datetime2").innerHTML = datetime;
+          setTimeout(() => {
+            document.getElementById("datetime3").innerHTML = datetime;
+          }, delay);
+        }, delay);
+      }
+      updateTime();
+      setInterval(updateTime, 1000);
+      </script>
+
+    <article>
+        <nav>
+            <a onclick="history.back()">back</a>
+            <h2>Signalfly Troubleshooting</h2>
+            <time>05/05/2001</time>
+        </nav>
+
+        <section>
+            <a href="/user/user1.html">
+                <aside>
+                    <img src="/icons/pfp.png">
+                    <span class="user-name">user1</span>
+                </aside>
+            </a>
+
+            <p>if you ever find data sent through signalfly that doesn’t display properly, you can use MAGNIFIER to try to decrypt it. <br><br>just grab the MAGNIFIER and hold it above the data you wish to decrypt.. MAGNIFIER also reveals exact post dates. hello, power user. </p>
+        </section>
+
+        <section>
+            <p>
+            <a href="/post/signups.html">sign up</a> to post a reply.
+        </p>
+        </section>
+
+    </article>
+</main>

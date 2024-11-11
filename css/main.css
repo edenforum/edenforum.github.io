@@ -20,10 +20,24 @@ html {
   top: 0;
   background-image: linear-gradient( rgba(255, 193, 229, 0.598)1%, rgba(200, 219, 224, 0.326));
 }
-
-.wavy {
+p.dt1 {
+  margin: 0;
+  position: relative;
+  left: 15px;
+  color: #ff79ce;
+}
+p.dt2 {
+  margin: 0;
+  position: relative;
+  top: 3px;
   color: #f7a0f38f;
-  filter: drop-shadow(15px 15px 0px #ff2aca) drop-shadow(-15px -15px 0px #ff93e463);
+}
+p.dt3 {
+  margin: 0;
+  position: relative;
+  left: -15px;
+  top: 6px;
+  color: #ff93e463;
 }
 body > header, main {
   
@@ -45,7 +59,9 @@ header h1 {
   margin: 0;
 }
 main {
-  opacity:100%;
+  opacity: 100%;
+  position: relative;
+  top: -6px;
 }
 header img {
   height: 2em;

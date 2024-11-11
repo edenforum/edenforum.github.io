@@ -27,17 +27,29 @@
 
 
 <main>
-    <p class="wavy">the date and time is: <span id="datetime"></span>...</p>
-    <script>
-    // date and time
-    function updateTime() {
+    <div class="wavy">
+        <p class="dt3">the date and time is: <span id="datetime3">10/26/2024, 7:42:13 PM</span>...</p>
+        <p class="dt2">the date and time is: <span id="datetime2">10/26/2024, 7:42:13 PM</span>...</p>
+        <p class="dt1">the date and time is: <span id="datetime">10/26/2024, 7:42:13 PM</span>...</p>
+      </div>
+      <script>
+      // date and time
+      let datetime;
+      let delay = 150;
+      function updateTime() {
         var now = new Date();
-        var datetime = now.toLocaleString();
+        datetime = now.toLocaleString();
         document.getElementById("datetime").innerHTML = datetime;
-    }
-    updateTime();
-    setInterval(updateTime, 1000);
-    </script>
+        setTimeout(() => {
+          document.getElementById("datetime2").innerHTML = datetime;
+          setTimeout(() => {
+            document.getElementById("datetime3").innerHTML = datetime;
+          }, delay);
+        }, delay);
+      }
+      updateTime();
+      setInterval(updateTime, 1000);
+      </script>
 
     <article>
         <nav>
@@ -67,7 +79,7 @@
             </a>
 
             <p>yeah, it's nice and simple. i know the reply dates are missing, but they added clutter
-                and it might turn away new users.... we should keep them off for release.
+                and it might turn away new users.... we should keep them off for release. also, the /untlisted links can just be accessed without concern for privacy. like, you can just type .com/unlisted and you'll see the newest unlisted post. you should probably make this post unlisted too.
             </p>
         </section>
         <section>
@@ -78,7 +90,7 @@
                 </aside>
             </a>
 
-            <p>something just took up almost all of our storage space completely out of nowhere.
+            <p>i'd love to work on fixing that but something just took up almost all of our storage space completely out of nowhere.
             there are new temporary files i can't delete that are totally corrupted. i don't know what's
             going on.. i didn't think a forum would be this difficult. let's talk more on MSN
             </p>
