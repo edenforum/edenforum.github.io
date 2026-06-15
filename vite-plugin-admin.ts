@@ -239,7 +239,7 @@ export function adminPlugin(): Plugin {
 							await fs.writeFile(file, renderPost(b), 'utf8');
 							return json(res, 200, {
 								ok: true,
-								path: `/post/${b.slug}`,
+								path: `/forum/post/${b.slug}`,
 							});
 						}
 
@@ -261,7 +261,7 @@ export function adminPlugin(): Plugin {
 							await fs.writeFile(file, renderUser(b), 'utf8');
 							return json(res, 200, {
 								ok: true,
-								path: `/user/${b.slug}`,
+								path: `/forum/user/${b.slug}`,
 							});
 						}
 

@@ -11,13 +11,9 @@ export interface Post {
 	hidden?: boolean;
 }
 
-export function postMeta(post: Post): Post {
-	return post;
-}
-
 export function readPosts() {
 	const posts = import.meta.glob<true, string, { meta: Post }>(
-		'../routes/post/**/+page.svelte',
+		'../routes/forum/post/**/+page.svelte',
 		{ eager: true }
 	);
 

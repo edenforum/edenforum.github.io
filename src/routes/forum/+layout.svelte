@@ -110,7 +110,7 @@
 	{@render children()}
 </main>
 
-{#if !$lightsOn && $page.url.pathname !== '/home2'}
+{#if !$lightsOn}
 	<Lightswitch />
 {/if}
 

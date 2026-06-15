@@ -35,5 +35,10 @@ export default ts.config(
 				svelteConfig
 			}
 		}
+	},
+	{
+		rules: {
+			"svelte/no-navigation-without-resolve": "off"
+		}
 	}
 );

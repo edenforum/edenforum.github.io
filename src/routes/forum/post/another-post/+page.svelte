@@ -22,5 +22,5 @@
 	playerTrack.set('/sounds/detective.mp3');
 </script>
 
-<Post username="user1" userIcon="/icons/user1.png" userHref="/user/user1">hiiiiiiii</Post>
+<Post username="user1" userIcon="/icons/user1.png" userHref="/forum/user/user1">hiiiiiiii</Post>
 <Post username="admin">thread locked</Post>
