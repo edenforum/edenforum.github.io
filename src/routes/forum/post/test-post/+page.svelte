@@ -18,7 +18,7 @@
 </script>
 
 <Post username="red">how do i post</Post>
-<Post username="user2" userHref="/user/user2" userIcon="/icons/pfp.png">
+<Post username="user2" userHref="/forum/user/user2" userIcon="/icons/pfp.png">
 	u did
 </Post>
 <Post username="red">btw if anybody gets to this post there's probably an exploit we haven't patched. this is probably a good post to keep up just in case.

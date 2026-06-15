@@ -219,7 +219,7 @@
 					required
 				/>
 			</label>
-			<small>→ /post/{pSlug || '…'}</small>
+			<small>→ /forum/post/{pSlug || '…'}</small>
 
 			<label>author<input bind:value={pAuthor} /></label>
 			<label>
@@ -252,7 +252,7 @@
 					</label>
 					<label>
 						profile link (optional)
-						<input bind:value={msg.href} placeholder="/user/user1" />
+						<input bind:value={msg.href} placeholder="/forum/user/user1" />
 					</label>
 					<label>
 						text<textarea bind:value={msg.text} rows="2"></textarea>
@@ -293,7 +293,7 @@
 					required
 				/>
 			</label>
-			<small>→ /user/{uSlug || '…'}</small>
+			<small>→ /forum/user/{uSlug || '…'}</small>
 
 			<label>
 				icon URL
@@ -319,8 +319,8 @@
 			<ul>
 				{#each posts as p (p.slug)}
 					<li>
-						<a href="/post/{p.slug}">{p.label}</a>
-						<span class="slug">/post/{p.slug}</span>
+						<a href="/forum/post/{p.slug}">{p.label}</a>
+						<span class="slug">/forum/post/{p.slug}</span>
 						<button class="ghost" onclick={() => del('post', p.slug)}>
 							delete
 						</button>
@@ -333,8 +333,8 @@
 			<ul>
 				{#each users as u (u.slug)}
 					<li>
-						<a href="/user/{u.slug}">{u.label}</a>
-						<span class="slug">/user/{u.slug}</span>
+						<a href="/forum/user/{u.slug}">{u.label}</a>
+						<span class="slug">/forum/user/{u.slug}</span>
 						<button class="ghost" onclick={() => del('user', u.slug)}>
 							delete
 						</button>
