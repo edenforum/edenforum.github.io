@@ -144,6 +144,14 @@
 		image-rendering: pixelated;
 	}
 
+	/* the mobile bump to a 10px root would enlarge the logo too; pin it back to
+	   ~42px so only the text and nav icons grow */
+	@media (max-width: 768px) {
+		nav .logo {
+			height: 4.2rem;
+		}
+	}
+
 	main {
 		filter: drop-shadow(15px 15px 7px #a968996e);
 	}

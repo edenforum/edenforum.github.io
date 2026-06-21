@@ -44,7 +44,7 @@ body {
    text, gaps, padding, and the images (whose sizes are in rem too). */
 @media (max-width: 768px) {
 	html {
-		font-size: 8px;
+		font-size: 10px;
 	}
 }
 
