@@ -212,6 +212,9 @@
 		outline: none;
 		padding: 0;
 		cursor: var(--cur-pointer);
+		/* a press-and-hold here picks up the magnifier; without this the browser
+		   reads the same gesture as a scroll and the lens never grabs on touch */
+		touch-action: none;
 	}
 
 	.search-btn.held {

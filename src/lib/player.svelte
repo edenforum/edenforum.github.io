@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { computePosition, flip, offset } from '@floating-ui/dom';
+	import { get } from 'svelte/store';
 	import {
 		playerTrack,
 		playerVolume,
@@ -64,7 +65,12 @@
 		gMuffled.connect(panner);
 		panner.connect(masterGain).connect(ctx.destination);
 		audioCtx = ctx;
-		applyVolume($playerVolume);
+		// Read the volume non-reactively: ensureCtx() is called synchronously from
+		// inside the track-load and play/pause effects, so a reactive `$playerVolume`
+		// read here would make those effects depend on the volume. A later volume
+		// drag would then re-run the track-load effect (stopSources + startOffset=0),
+		// restarting the song. The dedicated volume effect below keeps it in sync.
+		applyVolume(get(playerVolume));
 	}
 
 	async function fetchDecode(url: string): Promise<AudioBuffer | null> {

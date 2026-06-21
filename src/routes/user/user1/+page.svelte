@@ -5,7 +5,7 @@
 
 <Profile
 	username="user1"
-	iconURL="/icons/pfp.png"
+	iconURL="/icons/user1.png"
 	joinDate="01/01/1970 12:00 AM"
 >
 	<p>website creator... i like being mysterious</p>

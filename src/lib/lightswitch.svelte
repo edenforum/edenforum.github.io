@@ -484,5 +484,8 @@
 	canvas {
 		position: absolute;
 		inset: 0;
+		/* stop the browser from turning a cord-pull into a page scroll / zoom
+		   on touch devices — the pull gesture is ours to handle */
+		touch-action: none;
 	}
 </style>
