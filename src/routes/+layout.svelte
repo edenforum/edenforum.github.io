@@ -120,6 +120,9 @@
 		width: 100%;
 		margin: 0 auto;
 		max-width: 50rem;
+		/* breathing room so content never sits flush against phone edges
+		   (box-sizing: border-box keeps the column at 50rem on desktop) */
+		padding-inline: 1.25rem;
 	}
 
 	nav {
@@ -128,7 +131,7 @@
 		justify-content: space-between;
 		align-items: center;
 		filter: drop-shadow(15px 15px 7px #a968996e);
-		padding: 2rem 0;
+		padding-block: 2rem;
 	}
 
 	/* pixel-perfect: render at exactly 1x the source (335x84) so nearest-neighbor

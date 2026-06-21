@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { computePosition, flip, offset } from '@floating-ui/dom';
 	import { get } from 'svelte/store';
+	import { onMount } from 'svelte';
 	import {
 		playerTrack,
 		playerVolume,
@@ -190,6 +191,9 @@
 		}
 		computePosition(anchor, player, {
 			placement: 'bottom',
+			// the popup is portalled to <body> and positioned `fixed`, so resolve
+			// coordinates against the viewport to match
+			strategy: 'fixed',
 			middleware: [flip(), offset({ mainAxis: 8 })],
 		}).then(({ x, y }) => {
 			if (!player) {
@@ -250,6 +254,40 @@
 	$effect(() => {
 		applyVolume($playerVolume);
 	});
+
+	// Mobile browsers leave a freshly-created AudioContext suspended until it's
+	// resumed *inside* a user gesture. Pulling the lightswitch flips
+	// playerPlaying via a store, so our resume() lands in an async effect after
+	// the gesture window has closed — and the music never starts. Resume on the
+	// raw pointer gesture itself (e.g. grabbing the cord) so the context is
+	// already running by the time the switch triggers playback.
+	onMount(() => {
+		const unlock = () => {
+			if (audioCtx && audioCtx.state === 'suspended') {
+				audioCtx.resume().catch(() => {});
+			}
+		};
+		// pointerdown fires at the very start of the cord grab; keep it live so it
+		// also covers tapping play before any other interaction
+		window.addEventListener('pointerdown', unlock);
+		window.addEventListener('touchend', unlock);
+		return () => {
+			window.removeEventListener('pointerdown', unlock);
+			window.removeEventListener('touchend', unlock);
+		};
+	});
+
+	// The nav has a `filter`, which makes any descendant `position: fixed` resolve
+	// against the nav instead of the viewport. Move the popup to <body> so its
+	// floating-ui coordinates line up with the real viewport.
+	function portal(node: HTMLElement) {
+		document.body.appendChild(node);
+		return {
+			destroy() {
+				node.remove();
+			},
+		};
+	}
 </script>
 
 <button class="wrapper-btn" bind:this={anchor} onclick={() => (open = !open)}>
@@ -257,7 +295,7 @@
 </button>
 
 {#if open}
-	<div bind:this={player} class="popup-player">
+	<div bind:this={player} class="popup-player" use:portal>
 		<button
 			class="play-button"
 			onclick={() => ($playerPlaying = !$playerPlaying)}
@@ -311,5 +349,7 @@
 	.popup-player input {
 		appearance: auto;
 		cursor: var(--cur-pointer);
+		/* let the thumb be dragged on touch without the page scrolling */
+		touch-action: none;
 	}
 </style>
