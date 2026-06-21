@@ -221,10 +221,10 @@
 		opacity: 0; /* hidden instantly — the grown lens takes over on the cursor */
 	}
 
-	/* 32x32 source → exactly 1x, pixel-perfect nearest-neighbor */
+	/* 2rem = 32px (1x the 32x32 source) at the default root; halves on mobile */
 	.search-btn img {
-		height: 32px;
-		width: 32px;
+		height: 2rem;
+		width: 2rem;
 		image-rendering: pixelated;
 	}
 

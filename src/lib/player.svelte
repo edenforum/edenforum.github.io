@@ -255,24 +255,44 @@
 		applyVolume($playerVolume);
 	});
 
-	// Mobile browsers leave a freshly-created AudioContext suspended until it's
-	// resumed *inside* a user gesture. Pulling the lightswitch flips
-	// playerPlaying via a store, so our resume() lands in an async effect after
-	// the gesture window has closed — and the music never starts. Resume on the
-	// raw pointer gesture itself (e.g. grabbing the cord) so the context is
-	// already running by the time the switch triggers playback.
+	// iOS/Safari won't let a Web Audio context make sound until it's both resumed
+	// *and* has played a node inside a real user gesture. Pulling the lightswitch
+	// flips playerPlaying through a store, so a bare resume() otherwise lands in
+	// an async effect after the gesture window has closed and the music never
+	// starts. Unlock on the raw gesture (e.g. grabbing the cord): create the
+	// context, resume it, and play a one-sample silent buffer to satisfy iOS's
+	// "must play in a gesture" rule — then the context is awake and running by
+	// the time the switch requests playback.
 	onMount(() => {
 		const unlock = () => {
-			if (audioCtx && audioCtx.state === 'suspended') {
+			ensureCtx();
+			if (!audioCtx) {
+				return;
+			}
+			if (audioCtx.state === 'suspended') {
 				audioCtx.resume().catch(() => {});
 			}
+			try {
+				const b = audioCtx.createBuffer(1, 1, 22050);
+				const s = audioCtx.createBufferSource();
+				s.buffer = b;
+				s.connect(audioCtx.destination);
+				s.start(0);
+			} catch {
+				// best-effort unlock — ignore if the silent ping fails
+			}
+			// if playback was already requested and the buffers are ready, make
+			// sure it's actually running now that the context is awake
+			if ($playerPlaying) {
+				startSources();
+			}
 		};
-		// pointerdown fires at the very start of the cord grab; keep it live so it
-		// also covers tapping play before any other interaction
 		window.addEventListener('pointerdown', unlock);
+		window.addEventListener('touchstart', unlock);
 		window.addEventListener('touchend', unlock);
 		return () => {
 			window.removeEventListener('pointerdown', unlock);
+			window.removeEventListener('touchstart', unlock);
 			window.removeEventListener('touchend', unlock);
 		};
 	});
@@ -323,8 +343,8 @@
 		/* 32x32 source → exactly 1x, pixel-perfect nearest-neighbor
 		   (was 1.6rem = 25.6px, a fractional scale that blurred it) */
 		& img {
-			height: 32px;
-			width: 32px;
+			height: 2rem;
+			width: 2rem;
 			image-rendering: pixelated;
 		}
 	}

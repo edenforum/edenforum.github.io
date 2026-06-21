@@ -39,6 +39,15 @@ body {
 	font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+/* Mobile: render the whole UI at roughly half size so it isn't oversized on
+   phones. Halving the root font-size scales every rem-based dimension at once —
+   text, gaps, padding, and the images (whose sizes are in rem too). */
+@media (max-width: 768px) {
+	html {
+		font-size: 8px;
+	}
+}
+
 a {
 	cursor: var(--cur-pointer);
 }

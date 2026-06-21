@@ -137,7 +137,9 @@
 	/* pixel-perfect: render at exactly 1x the source (335x84) so nearest-neighbor
 	   has no fractional scaling to blur or misalign */
 	nav .logo {
-		height: 84px;
+		/* 5.25rem = 84px (1x the 335x84 source) at the default 16px root; halves
+		   automatically on mobile where the root font-size is reduced */
+		height: 5.25rem;
 		width: auto;
 		image-rendering: pixelated;
 	}
@@ -170,10 +172,10 @@
 		cursor: var(--cur-knock-2);
 	}
 
-	/* 32x32 source → exactly 1x, pixel-perfect nearest-neighbor */
+	/* 2rem = 32px (1x the 32x32 source) at the default root; halves on mobile */
 	ul li img {
-		height: 32px;
-		width: 32px;
+		height: 2rem;
+		width: 2rem;
 		image-rendering: pixelated;
 	}
 
