@@ -1,0 +1,209 @@
+/* /post/drone only, !important beats svelte scoped styles */
+
+body.drone-page {
+	/* shared colours for nav titles and music popup */
+	--blue: #5a5a5a;
+	--blue-2: #fffefe;
+	--pink: #615f6164;
+
+	/* cursors, fall back to auto if missing */
+	--cur-default: url(/icons/cursors/default_arrow.cur), auto;
+	--cur-pointer: url(/icons/cursors/default_point.cur), auto;
+	--cur-knock-1: url(/icons/cursors/knock_hover.cur), auto;
+	--cur-knock-2: url(/icons/cursors/knock_click.cur), auto;
+
+	/* wallpaper, first layer on top */
+	background-color: #fde9ff !important;
+	background-image:
+		linear-gradient(rgba(2, 2, 2, 0.832) 1%, #0101019f),
+		url(/icons/nightsky.gif) !important;
+	background-repeat: repeat !important;
+	background-position: center top !important;
+	background-size: auto !important;
+	background-attachment: scroll !important;
+
+	color: #ffffff !important;
+	cursor: var(--cur-default) !important;
+	font-family: Georgia, 'Times New Roman', Times, serif !important;
+	font-size: 1rem !important;
+}
+
+/* type + links, incl portaled popups */
+body.drone-page,
+body.drone-page * {
+	font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+body.drone-page a {
+	color: inherit !important;
+	text-decoration: underline;
+	cursor: var(--cur-pointer) !important;
+}
+
+body.drone-page img {
+	image-rendering: crisp-edges !important;
+}
+
+/* site header */
+body.drone-page nav {
+	filter: drop-shadow(15px 15px 7px #ffffff1b) brightness(0.2) !important;
+	padding-block: 2rem !important;
+}
+
+body.drone-page nav .logo {
+	height: 5.25rem !important;
+	image-rendering: pixelated !important;
+}
+
+body.drone-page nav ul {
+	gap: 2rem !important;
+}
+
+body.drone-page nav ul li img,
+body.drone-page nav .wrapper-btn img,
+body.drone-page nav .search-btn img {
+	height: 2rem !important;
+	width: 2rem !important;
+	image-rendering: pixelated !important;
+}
+
+/* clock under the header */
+body.drone-page main > .time {
+	color: #b75884 !important;
+	padding-left: 1rem !important;
+	font-size: 1rem !important;
+}
+
+/* content column */
+body.drone-page main {
+	max-width: 50rem !important;
+	padding-inline: 1.25rem !important;
+	filter: drop-shadow(15px 15px 7px #913f3f2b) !important;
+}
+
+/* post title bar */
+body.drone-page article .nav {
+	display: grid !important;
+	grid-template-columns: repeat(3, 1fr) !important;
+	background-color: #160e14 !important;
+	color: hsl(0, 0%, 42%) !important;
+	padding: 0.5em !important;
+}
+
+body.drone-page article .nav .back-btn {
+	color: inherit !important;
+	cursor: var(--cur-pointer) !important;
+	font-size: 1rem !important;
+	text-align: left !important;
+}
+
+body.drone-page article .nav .back-btn:hover {
+	text-decoration: underline !important;
+}
+
+body.drone-page article .nav h2 {
+	margin: 0 !important;
+	color: var(--blue-2) !important;
+	font-size: 1rem !important;
+	text-align: center !important;
+}
+
+body.drone-page article .nav time {
+	color: inherit !important;
+	font-size: 1rem !important;
+	text-align: right !important;
+}
+
+/* comment cards, even ones use alt background */
+body.drone-page article > section {
+	background-color: #07070764 !important;
+	color: #000000 !important;
+	padding: 1em !important;
+	gap: 1em !important;
+}
+
+body.drone-page article > section:nth-child(2n) {
+	background-color: #00000064 !important;
+}
+
+body.drone-page article > section p {
+	color: rgb(255, 255, 255) !important;
+	font-size: 1rem !important;
+}
+
+body.drone-page article > section p.rainbow {
+	color: transparent !important;
+	background-image: linear-gradient(
+		90deg,
+		oklch(80% 70% 0deg),
+		oklch(80% 70% 30deg),
+		oklch(80% 70% 60deg),
+		oklch(80% 70% 90deg),
+		oklch(80% 70% 120deg),
+		oklch(80% 70% 150deg),
+		oklch(80% 70% 180deg),
+		oklch(80% 70% 210deg),
+		oklch(80% 70% 240deg),
+		oklch(80% 70% 270deg),
+		oklch(80% 70% 300deg),
+		oklch(80% 70% 330deg),
+		oklch(80% 70% 360deg)
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+}
+
+body.drone-page article > section .user-name {
+	color: var(--blue-2) !important;
+	font-size: 1rem !important;
+}
+
+body.drone-page article > section aside img {
+	width: 6rem !important;
+	height: 6rem !important;
+	image-rendering: crisp-edges !important;
+}
+
+/* images inside a comment */
+body.drone-page article > section p img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* music popup, portaled to body */
+body.drone-page .popup-player {
+	background-color: var(--pink) !important;
+	color: inherit !important;
+	padding: 0.5rem !important;
+	gap: 0.25rem !important;
+}
+
+body.drone-page .popup-player .play-button {
+	color: inherit !important;
+	cursor: var(--cur-pointer) !important;
+	font-size: 1rem !important;
+	padding: 0.25rem 0.5rem !important;
+}
+
+/* hidden notes, hold info icon to reveal */
+body.drone-page .secret {
+	color: #ff79ce !important;
+	font-style: italic !important;
+	font-size: 1.1rem !important;
+	text-shadow: 0 0 8px rgba(255, 121, 206, 0.6) !important;
+}
+
+body.drone-page .secret img {
+	filter: drop-shadow(0 0 10px rgba(255, 121, 206, 0.5)) !important;
+}
+
+@media (max-width: 768px) {
+	body.drone-page {
+		/* root layout scales site via html font-size */
+		font-size: 1rem !important;
+	}
+
+	body.drone-page nav .logo {
+		height: 4.2rem !important;
+	}
+}
