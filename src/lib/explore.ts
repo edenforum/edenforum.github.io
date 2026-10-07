@@ -43,7 +43,7 @@ export const scenes: Scene[] = [
 		aspect: 4 / 3,
 		ambient: '/sounds/scene2.mp3',
 		hotspots: [
-			{ x: 0, y: 93, w: 100, h: 8, label: 'go back', to: 'scene-1' },
+			{ x: 0, y: 93, w: 100, h: 8, label: 'go back', to: 'scene-1', sound: '/sounds/footsteps.mp3'},
 			{ x: 35, y: 29, w: 30, h: 60, label: 'the door', code: 'vnn', to: 'scene-3' },
 		]
 	},

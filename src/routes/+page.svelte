@@ -124,6 +124,9 @@
 		background-color: var(--pink);
 	}
 	.mark-unread {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		background: none;
 		border: none;
 		outline: none;
@@ -156,6 +159,9 @@
 	}
 	.row .col.new {
 		flex: 0 0 4rem;
+	}
+	.row .col.new img {
+		display: block;
 	}
 	.row .col.title {
 		flex: 1;
