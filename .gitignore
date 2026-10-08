@@ -24,3 +24,6 @@ vite.config.ts.timestamp-*
 
 # Editor backups
 *~
+
+# Sound Forge peak files (regenerable, not used by the site)
+*.sfk

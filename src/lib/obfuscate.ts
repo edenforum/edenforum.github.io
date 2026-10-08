@@ -1,9 +1,4 @@
-// Lightweight obfuscation for "secret" content that has to live in the client.
-//
-// NOT security. This only keeps plaintext out of the rendered DOM and the
-// casual view-source / inspect-element glance. The key ships in this file (and
-// the bundle), so anyone who reads the source can reverse it. Real secrecy
-// needs a server.
+// obfuscation for "secret" content
 
 const KEY = 'edenforum-s3cret';
 
@@ -24,7 +19,7 @@ function fromBase64(value: string): Uint8Array {
 	return bytes;
 }
 
-// plain text -> encoded payload (use at authoring time)
+// plain text -> encoded
 export function enc(plain: string): string {
 	const bytes = new TextEncoder().encode(plain);
 	const out = new Uint8Array(bytes.length);
@@ -34,7 +29,7 @@ export function enc(plain: string): string {
 	return toBase64(out);
 }
 
-// encoded payload -> plain text (returns '' if it isn't decodable)
+// encoded -> plain text
 export function dec(payload: string): string {
 	try {
 		const bytes = fromBase64(payload);

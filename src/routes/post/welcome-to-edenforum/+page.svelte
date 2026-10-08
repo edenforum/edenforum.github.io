@@ -20,5 +20,6 @@
 
 <Post username="user1" userIcon="/icons/user1.png" userHref="/user/user1">WELCOME TO EDENFORUM!!! i have big big plans for this website! i just hope people actually use it </Post>
 <Post username="megaman49" userIcon="/icons/megaman.png" userHref="/user/megaman49">HIIIII!!!!!!!!</Post>
+<Post username="claudia62967" userIcon="/icons/claudia62967.gif" userHref="/user/claudia62967">first</Post>
 <Post username="rainbowguy" userIcon="/icons/rainbowguy.gif" userHref="/user/rainbowguy" class="rainbow">Lol And Then The Owner Vanished For Like 24 Years</Post>
-<Post username="user1" userIcon="/icons/user1.png" userHref="/user/user1" hidden={true}>please help me</Post>
+<Post username="user1" userIcon="/icons/user1.png" userHref="/user/user1" hidden secret="FQgADxUKUh0IQQMTDhc=" />

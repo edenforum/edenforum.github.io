@@ -210,8 +210,6 @@
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 0.25s ease;
-		/* keep one stable layer so the pixel-art flower isn't
-		   re-rasterized (and resized) when the fade starts */
 		will-change: opacity;
 	}
 	.row.linger.found .col.title a,
