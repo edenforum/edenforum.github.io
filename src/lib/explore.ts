@@ -44,7 +44,7 @@ export const scenes: Scene[] = [
 		ambient: '/sounds/scene2.mp3',
 		hotspots: [
 			{ x: 0, y: 93, w: 100, h: 8, label: 'go back', to: 'scene-1', sound: '/sounds/footsteps.mp3'},
-			{ x: 35, y: 29, w: 30, h: 60, label: 'the door', code: 'vnvn', to: 'scene-3' },
+			{ x: 35, y: 29, w: 30, h: 60, label: 'the door', code: 'EwoTAA==', to: 'scene-3' },
 		]
 	},
 	{

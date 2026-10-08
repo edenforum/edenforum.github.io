@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { readPosts, type Post } from '$lib/postMeta';
 	import { playerTrack, viewedPosts, lens } from '$lib/stores';
+	import Secret from '$lib/secret.svelte';
 
 	playerTrack.set('/sounds/weatherchannel.mp3');
 
@@ -25,11 +26,10 @@
 				continue;
 			}
 			const el = revealEls[path];
-			const titleEl = el?.querySelector('.col.title a');
-			if (!titleEl) {
+			if (!el) {
 				continue;
 			}
-			const r = titleEl.getBoundingClientRect();
+			const r = el.getBoundingClientRect();
 			const nx = Math.max(r.left, Math.min(l.x, r.right));
 			const ny = Math.max(r.top, Math.min(l.y, r.bottom));
 			if (Math.hypot(l.x - nx, l.y - ny) <= l.r) {
@@ -81,7 +81,15 @@
 			</button>
 		{/if}
 	</div>
-	<div class="col title"><a href={path}>{post.title}</a></div>
+	<div class="col title">
+		<a href={post.hidden && !discovered[path] ? undefined : path}>
+			{#if post.hidden}
+				<Secret value={post.title} shown={discovered[path]} placeholder="…" />
+			{:else}
+				{post.title}
+			{/if}
+		</a>
+	</div>
 	<div class="col date">{post.date}</div>
 	<div class="col comments">{post.comments}</div>
 {/snippet}

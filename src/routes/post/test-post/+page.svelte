@@ -3,7 +3,9 @@
 	import Post from '$lib/post.svelte';
 
 	export const meta = {
-		title: 'test post',
+		// title is obfuscated (see $lib/obfuscate) so inspecting the home page
+		// doesn't reveal it before the magnifier finds it
+		title: 'EQEWGkYfHQYZ',
 		author: 'user1',
 		date: '02/05/2001 | 13:37',
 		comments: '3',

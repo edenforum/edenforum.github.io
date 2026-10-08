@@ -3,6 +3,7 @@
 	import { get } from 'svelte/store';
 	import { page } from '$app/stores';
 	import { findScene, startScene, type Hotspot } from '$lib/explore';
+	import { dec } from '$lib/obfuscate';
 	import { setAmbient, setAmbientVolume, stopAmbient, playSfx } from '$lib/ambient';
 	import { visiblePostPaths } from '$lib/postMeta';
 	import {
@@ -39,6 +40,15 @@
 	const lockCode = $derived(
 		paths.map((p) => ($viewedPosts[p] ? 'v' : 'n')).join('')
 	);
+
+	// hotspot codes are obfuscated in explore.ts (see $lib/obfuscate)
+	function lockedHotspot(h: Hotspot) {
+		if (!h.code) {
+			return false;
+		}
+		const code = dec(h.code);
+		return lockCode.slice(0, code.length) !== code;
+	}
 
 	// hidden layer, only shows through the glass
 	function layerMask(): string {
@@ -148,7 +158,7 @@
 		{/if}
 
 		{#each scene.hotspots as h, i (i)}
-			{@const locked = !!h.code && lockCode.slice(0, h.code.length) !== h.code}
+			{@const locked = lockedHotspot(h)}
 			<button
 				class="hotspot"
 				class:debug

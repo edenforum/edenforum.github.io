@@ -1,11 +1,14 @@
 <script lang="ts">
 	import Section from '$lib/section.svelte';
 	import PageNav from '$lib/page-nav.svelte';
+	import Secret from '$lib/secret.svelte';
 	import { lens, playerTrack } from '$lib/stores';
 
 	playerTrack.set('/sounds/detective.mp3');
 
-	// info page secret
+	// info page secret (obfuscated, see $lib/obfuscate)
+	const secret = 'HAsQTgAABxsJDR5WQlM=';
+
 	let secretEl = $state<HTMLParagraphElement>();
 	const mask = $derived.by(() => {
 		const l = $lens;
@@ -16,6 +19,18 @@
 		const x = l.x - rect.left;
 		const y = l.y - rect.top;
 		return `radial-gradient(circle ${l.r}px at ${x}px ${y}px, #000 62%, rgba(0,0,0,0.5) 84%, transparent 100%)`;
+	});
+
+	// only decode the text once the glass is actually over it
+	const shown = $derived.by(() => {
+		const l = $lens;
+		if (!l || !secretEl) {
+			return false;
+		}
+		const r = secretEl.getBoundingClientRect();
+		const nx = Math.max(r.left, Math.min(l.x, r.right));
+		const ny = Math.max(r.top, Math.min(l.y, r.bottom));
+		return Math.hypot(l.x - nx, l.y - ny) <= l.r;
 	});
 </script>
 
@@ -45,7 +60,7 @@
 	style={mask ? `-webkit-mask-image:${mask};mask-image:${mask}` : 'opacity:0'}
 	aria-hidden="true"
 >
-	you found me!!
+	<Secret value={secret} shown={shown} />
 </p>
 
 <style>

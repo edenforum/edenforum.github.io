@@ -2,6 +2,7 @@ import type { Plugin } from 'vite';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { dec, enc } from './src/lib/obfuscate';
 
 // dev-only authoring tools.
 // scaffolds real +page.svelte files under /__admin while running `npm run dev`.
@@ -80,18 +81,24 @@ function renderPost(b: PostBody): string {
 				attrs.push(`userHref="${escAttr(m.href)}"`);
 			}
 			if (m.hidden) {
+				// keep the hidden text out of the DOM until it's revealed
 				attrs.push('hidden');
+				attrs.push(`secret="${escAttr(enc(m.text))}"`);
+				return `<Post ${attrs.join(' ')} />`;
 			}
 			return `<Post ${attrs.join(' ')}>${escText(m.text)}</Post>`;
 		})
 		.join('\n');
+
+	// hidden post titles are stored obfuscated (see src/lib/obfuscate)
+	const title = b.hidden ? enc(b.title) : b.title;
 
 	return `<script module lang="ts">
 	import { viewPost, type Post as PostMeta } from '$lib/postMeta';
 	import Post from '$lib/post.svelte';
 
 	export const meta = {
-		title: '${escJs(b.title)}',
+		title: '${escJs(title)}',
 		author: '${escJs(b.author)}',
 		date: '${escJs(b.date)}',
 		comments: '${escJs(b.comments)}',
@@ -200,11 +207,12 @@ export function adminPlugin(): Plugin {
 					const url = (req.url || '').split('?')[0];
 					try {
 						if (req.method === 'GET' && url === '/list') {
-							const posts = await listDir(
-								postsDir,
-								(s) =>
-									s.match(/title:\s*'((?:[^'\\]|\\.)*)'/)?.[1] ?? ''
-							);
+							const posts = await listDir(postsDir, (s) => {
+								const title =
+									s.match(/title:\s*'((?:[^'\\]|\\.)*)'/)?.[1] ?? '';
+								// hidden titles are stored obfuscated
+								return /hidden:\s*true/.test(s) ? dec(title) : title;
+							});
 							const users = await listDir(
 								usersDir,
 								(s) =>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { lens } from '$lib/stores';
+	import Secret from '$lib/secret.svelte';
 
 	const {
 		children = $bindable(),
@@ -8,6 +9,7 @@
 		userIcon = '/icons/pfp.png',
 		class: className = '',
 		hidden = false,
+		secret = '',
 	} = $props();
 
 	let el = $state<HTMLElement>();
@@ -56,7 +58,11 @@
 		</aside>
 	{/if}
 	<p class={className}>
-		{@render children()}
+		{#if secret}
+			<Secret value={secret} shown={found} placeholder="…" />
+		{:else}
+			{@render children()}
+		{/if}
 	</p>
 {/snippet}
 
