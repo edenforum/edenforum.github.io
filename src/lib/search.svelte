@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { audioMuffled, audioPan, lens } from '$lib/stores';
+	import { audioMuffled, audioPan, lens, scrollY } from '$lib/stores';
 
 	// click goes to info, hold picks up the magnifier
 
@@ -39,6 +39,35 @@
 	const REVEAL_SCALE = 2 / 3; // reveal radius, slightly smaller than icon
 	const GLASS_OFFSET = 0.26; // shift glass up-left, fraction of radius
 
+	// edge auto-scroll while the glass is held: the top 20% of the screen
+	// scrolls up, the bottom 20% scrolls down (speed ramps toward the edge)
+	const EDGE = 0.2;
+	const MAX_SCROLL = 16; // px per frame at the very edge
+	let scrollRaf = 0;
+
+	function scrollStep() {
+		if (!active) {
+			scrollRaf = 0;
+			return;
+		}
+		const h = window.innerHeight;
+		const top = h * EDGE;
+		const bottom = h * (1 - EDGE);
+		let dir = 0;
+		if (lensY < top) {
+			dir = -1;
+		} else if (lensY > bottom) {
+			dir = 1;
+		}
+		if (dir !== 0) {
+			const depth =
+				dir < 0 ? (top - lensY) / top : (lensY - bottom) / (h - bottom);
+			const speed = Math.min(1, Math.max(0, depth)) * MAX_SCROLL;
+			window.scrollBy(0, dir * speed);
+		}
+		scrollRaf = requestAnimationFrame(scrollStep);
+	}
+
 	// click vs hold
 	const HOLD_MS = 160;
 	const MOVE_PX = 6;
@@ -49,8 +78,12 @@
 	let downY = 0;
 
 	// secrets only visible through the lens; entries like { top, left, text }
-	const secrets: { top: string; left: string; text?: string; img?: string }[] =
-		[];
+	const secrets: {
+		top: string;
+		left: string;
+		text?: string;
+		img?: string;
+	}[] = [];
 
 	function panFor(x: number) {
 		const t = (x / window.innerWidth) * 2 - 1; // -1 .. 1
@@ -67,6 +100,7 @@
 		document.body.style.cursor = 'none';
 		audioMuffled.set(true);
 		audioPan.set(panFor(lensX));
+		scrollRaf = requestAnimationFrame(scrollStep); // edge auto-scroll
 	}
 
 	function onPointerDown(ev: PointerEvent) {
@@ -87,7 +121,10 @@
 		}
 		lensX = ev.clientX;
 		lensY = ev.clientY;
-		if (!active && Math.hypot(ev.clientX - downX, ev.clientY - downY) > MOVE_PX) {
+		if (
+			!active &&
+			Math.hypot(ev.clientX - downX, ev.clientY - downY) > MOVE_PX
+		) {
 			activate();
 		}
 		if (active) {
@@ -98,6 +135,8 @@
 	// put the magnifier down without treating it as a click
 	function drop() {
 		cancelAnimationFrame(growRaf);
+		cancelAnimationFrame(scrollRaf);
+		scrollRaf = 0;
 		active = false;
 		radius = 0;
 		document.body.style.cursor = '';
@@ -133,6 +172,9 @@
 	}
 
 	onMount(() => {
+		const onScroll = () => scrollY.set(window.scrollY);
+		onScroll();
+		window.addEventListener('scroll', onScroll, { passive: true });
 		window.addEventListener('pointermove', onPointerMove);
 		window.addEventListener('pointerup', onPointerUp);
 		window.addEventListener('pointercancel', onPointerCancel);
@@ -140,6 +182,8 @@
 		return () => {
 			clearTimeout(holdTimer);
 			cancelAnimationFrame(growRaf);
+			cancelAnimationFrame(scrollRaf);
+			window.removeEventListener('scroll', onScroll);
 			window.removeEventListener('pointermove', onPointerMove);
 			window.removeEventListener('pointerup', onPointerUp);
 			window.removeEventListener('pointercancel', onPointerCancel);
@@ -158,6 +202,9 @@
 
 	// share the lens so page secrets can mask too
 	$effect(() => {
+		// touch the scroll store so the lens is re-published (new object) as
+		// the page auto-scrolls, letting masks re-measure under the fixed glass
+		void $scrollY;
 		lens.set(radius > 0 ? { x: revealX, y: revealY, r: revealR } : null);
 	});
 

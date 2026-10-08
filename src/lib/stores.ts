@@ -60,7 +60,9 @@ function sessionCookieStorage(): Storage {
 			const match = document.cookie
 				.split('; ')
 				.find((row) => row.startsWith(`${key}=`));
-			return match ? decodeURIComponent(match.slice(key.length + 1)) : null;
+			return match
+				? decodeURIComponent(match.slice(key.length + 1))
+				: null;
 		},
 		key() {
 			return null;
@@ -100,6 +102,10 @@ export const audioPan = writable(0);
 
 // glass lens in viewport px, null when down, pages mask to it
 export const lens = writable<{ x: number; y: number; r: number } | null>(null);
+
+// viewport scroll offset. the lens masks recompute from this so hidden
+// content stays put under the glass while the page auto-scrolls.
+export const scrollY = writable(0);
 export const viewedPosts = persistentWritable<Record<string, boolean>>(
 	'viewedPosts',
 	{}
