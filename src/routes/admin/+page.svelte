@@ -426,6 +426,36 @@
 		border-radius: 4px;
 		background: #fff;
 	}
+	/* the global reset sets appearance:none on everything, which erases the
+	   native checkbox, so draw our own and show a checked state */
+	input[type='checkbox'] {
+		flex: none;
+		width: 1rem;
+		height: 1rem;
+		padding: 0;
+		display: inline-grid;
+		place-content: center;
+		cursor: pointer;
+	}
+	input[type='checkbox']::before {
+		content: '';
+		width: 0.55rem;
+		height: 0.55rem;
+		transform: scale(0);
+		transition: transform 100ms ease;
+		background: hsl(318, 47%, 50%);
+		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	}
+	input[type='checkbox']:checked::before {
+		transform: scale(1);
+	}
+	input[type='checkbox']:hover {
+		border-color: hsl(318, 47%, 50%);
+	}
+	input[type='checkbox']:focus-visible {
+		outline: 2px solid var(--blue, #6ea8d8);
+		outline-offset: 1px;
+	}
 	small {
 		color: #a06a92;
 		font-family: monospace;
