@@ -95,6 +95,16 @@
 		}
 	}
 
+	// put the magnifier down without treating it as a click
+	function drop() {
+		cancelAnimationFrame(growRaf);
+		active = false;
+		radius = 0;
+		document.body.style.cursor = '';
+		audioMuffled.set(false);
+		audioPan.set(0);
+	}
+
 	function onPointerUp() {
 		if (!down) {
 			return;
@@ -109,22 +119,31 @@
 		}
 
 		// drop the magnifier
-		cancelAnimationFrame(growRaf);
-		active = false;
-		radius = 0;
-		document.body.style.cursor = '';
-		audioMuffled.set(false);
-		audioPan.set(0);
+		drop();
+	}
+
+	// if the browser steals the gesture (scroll, context menu, tab switch)
+	// pointerup never arrives, so the lens would stay stuck on. drop it here.
+	function onPointerCancel() {
+		down = false;
+		clearTimeout(holdTimer);
+		if (active) {
+			drop();
+		}
 	}
 
 	onMount(() => {
 		window.addEventListener('pointermove', onPointerMove);
 		window.addEventListener('pointerup', onPointerUp);
+		window.addEventListener('pointercancel', onPointerCancel);
+		window.addEventListener('blur', onPointerCancel);
 		return () => {
 			clearTimeout(holdTimer);
 			cancelAnimationFrame(growRaf);
 			window.removeEventListener('pointermove', onPointerMove);
 			window.removeEventListener('pointerup', onPointerUp);
+			window.removeEventListener('pointercancel', onPointerCancel);
+			window.removeEventListener('blur', onPointerCancel);
 		};
 	});
 

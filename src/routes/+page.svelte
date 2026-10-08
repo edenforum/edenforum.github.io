@@ -97,6 +97,7 @@
 				<!-- overlay: the whole post, revealed through the lens -->
 				<div
 					class="row reveal"
+					class:revealing={!!$lens}
 					bind:this={revealEls[path]}
 					style={maskFor(path)}
 					aria-hidden="true"
@@ -181,6 +182,12 @@
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
+		/* stay hidden unless the glass is actually revealing it, so a
+		   missing/stale mask can't leave a solid bar behind */
+		opacity: 0;
+	}
+	.row.reveal.revealing {
+		opacity: 1;
 	}
 	.row.reveal .col {
 		background-color: var(--pink);

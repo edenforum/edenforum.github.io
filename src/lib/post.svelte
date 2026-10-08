@@ -67,7 +67,7 @@
 			{@render content()}
 		</div>
 		<!-- overlay: the whole comment, revealed through the lens -->
-		<div class="layer reveal" style={maskFor()} aria-hidden="true">
+		<div class="layer reveal" class:revealing={!!$lens} style={maskFor()} aria-hidden="true">
 			{@render content()}
 		</div>
 	</section>
@@ -153,15 +153,18 @@
 		pointer-events: auto;
 	}
 
-	/* only the message lingers, not the avatar/username, so a stray
-	   profile picture doesn't sit in the hidden section */
-	section.secret .layer.base aside {
-		visibility: hidden;
-	}
+	/* the avatar/username lingers along with the message */
 
 	section.secret .layer.reveal {
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
+		/* hidden unless the glass is over it, so a stale mask can't leave
+		   the whole comment sitting on the page */
+		opacity: 0;
+	}
+
+	section.secret .layer.reveal.revealing {
+		opacity: 1;
 	}
 </style>
