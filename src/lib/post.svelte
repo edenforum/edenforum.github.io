@@ -1,14 +1,47 @@
 <script lang="ts">
+	import { lens } from '$lib/stores';
+
 	const {
 		children = $bindable(),
 		username = '',
 		userHref = undefined as string | undefined,
 		userIcon = '/icons/pfp.png',
 		class: className = '',
+		hidden = false,
 	} = $props();
+
+	let el = $state<HTMLElement>();
+	let found = $state(false);
+
+	// latch found once the magnifier grazes this comment
+	$effect(() => {
+		const l = $lens;
+		if (!hidden || found || !l || !el) {
+			return;
+		}
+		const r = el.getBoundingClientRect();
+		const nx = Math.max(r.left, Math.min(l.x, r.right));
+		const ny = Math.max(r.top, Math.min(l.y, r.bottom));
+		if (Math.hypot(l.x - nx, l.y - ny) <= l.r) {
+			found = true;
+		}
+	});
+
+	// reveal overlay mask, offset so the circle lines up with the glass
+	function maskFor(): string {
+		const l = $lens;
+		if (!l || !el) {
+			return 'opacity:0'; // glass down: hide overlay, keep the linger
+		}
+		const r = el.getBoundingClientRect();
+		const x = l.x - r.left;
+		const y = l.y - r.top;
+		const m = `radial-gradient(circle ${l.r}px at ${x}px ${y}px, #000 62%, rgba(0,0,0,0.5) 84%, transparent 100%)`;
+		return `-webkit-mask-image:${m};mask-image:${m}`;
+	}
 </script>
 
-<section>
+{#snippet content()}
 	{#if typeof userHref !== 'undefined'}
 		<a href={userHref}>
 			<aside>
@@ -25,7 +58,24 @@
 	<p class={className}>
 		{@render children()}
 	</p>
-</section>
+{/snippet}
+
+{#if hidden}
+	<section class="secret" class:found bind:this={el}>
+		<!-- base layer: the lingering 20% comment once found -->
+		<div class="layer base">
+			{@render content()}
+		</div>
+		<!-- overlay: the whole comment, revealed through the lens -->
+		<div class="layer reveal" style={maskFor()} aria-hidden="true">
+			{@render content()}
+		</div>
+	</section>
+{:else}
+	<section>
+		{@render content()}
+	</section>
+{/if}
 
 <style>
 	p {
@@ -67,5 +117,51 @@
 		.user-name {
 			color: var(--blue-2);
 		}
+	}
+
+	/* hidden comments: revealed through the magnifier like hidden posts */
+	section.secret {
+		position: relative;
+		display: block;
+		padding: 0;
+		background: none;
+	}
+
+	section.secret .layer {
+		display: flex;
+		align-items: start;
+		padding: 1em;
+		gap: 1em;
+
+		color: #ffffff;
+		background-color: #fedeff64;
+	}
+
+	section.secret:nth-child(2n) .layer {
+		background-color: #e5d3ff64;
+	}
+
+	section.secret .layer.base {
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.25s ease;
+		will-change: opacity;
+	}
+
+	section.secret.found .layer.base {
+		opacity: 0.2;
+		pointer-events: auto;
+	}
+
+	/* only the message lingers, not the avatar/username, so a stray
+	   profile picture doesn't sit in the hidden section */
+	section.secret .layer.base aside {
+		visibility: hidden;
+	}
+
+	section.secret .layer.reveal {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
 	}
 </style>

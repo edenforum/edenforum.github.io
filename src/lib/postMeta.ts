@@ -15,6 +15,20 @@ export function postMeta(post: Post): Post {
 	return post;
 }
 
+// "MM/DD/YYYY | HH:mm" -> ms since epoch, for sorting by post date
+function postTimestamp(date: string): number {
+	const [dayPart, timePart = '00:00'] = date.split('|');
+	const [month, day, year] = dayPart.trim().split('/').map(Number);
+	const [hours, minutes] = timePart.trim().split(':').map(Number);
+	return new Date(
+		year || 0,
+		(month || 1) - 1,
+		day || 1,
+		hours || 0,
+		minutes || 0
+	).getTime();
+}
+
 export function readPosts() {
 	const posts = import.meta.glob<true, string, { meta: Post }>(
 		'../routes/post/**/+page.svelte',
@@ -28,9 +42,17 @@ export function readPosts() {
 		newAllPosts[cleanPath] = v.meta;
 	}
 
-	allPosts.set(newAllPosts);
+	// newest first; string-keyed objects keep this insertion order
+	const ordered: Record<string, Post> = {};
+	for (const [path, post] of Object.entries(newAllPosts).sort(
+		([, a], [, b]) => (postTimestamp(b.date) || 0) - (postTimestamp(a.date) || 0)
+	)) {
+		ordered[path] = post;
+	}
 
-	return newAllPosts;
+	allPosts.set(ordered);
+
+	return ordered;
 }
 
 // unhidden post paths in homepage order

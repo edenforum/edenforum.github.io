@@ -8,7 +8,7 @@
 	iconURL="/icons/deer.png"
 	joinDate="05/05/2026"
 >
-	<p>ask me anything about deers. i love microtonal music and math rock.. is anyone even here?</p>
+	<p>deerfan 1 and 2 were already taken...</p>
 </Profile>
 
 <Section>

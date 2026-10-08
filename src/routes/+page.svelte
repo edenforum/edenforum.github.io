@@ -187,36 +187,21 @@
 	}
 
 	/* magnifier linger */
-	.row.linger .col:not(.title) {
+	.row.linger .col:not(.title):not(.new) {
 		visibility: hidden;
 	}
-	.row.linger .col.title a {
+	.row.linger .col.title a,
+	.row.linger .col.new {
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 0.25s ease;
+		/* keep one stable layer so the pixel-art flower isn't
+		   re-rasterized (and resized) when the fade starts */
+		will-change: opacity;
 	}
-	.row.linger.found .col.title a {
+	.row.linger.found .col.title a,
+	.row.linger.found .col.new {
 		opacity: 0.2;
 		pointer-events: auto;
-	}
-	.rainbow {
-		color: transparent;
-		background: linear-gradient(
-			90deg,
-			oklch(80% 70% 0deg),
-			oklch(80% 70% 30deg),
-			oklch(80% 70% 60deg),
-			oklch(80% 70% 90deg),
-			oklch(80% 70% 120deg),
-			oklch(80% 70% 150deg),
-			oklch(80% 70% 180deg),
-			oklch(80% 70% 210deg),
-			oklch(80% 70% 240deg),
-			oklch(80% 70% 270deg),
-			oklch(80% 70% 300deg),
-			oklch(80% 70% 330deg),
-			oklch(80% 70% 360deg)
-		);
-		background-clip: text;
 	}
 </style>

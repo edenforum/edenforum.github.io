@@ -4,7 +4,13 @@
 	// dev only, prod build strips this page and its api
 	const dev = import.meta.env.DEV;
 
-	type Message = { username: string; icon: string; href: string; text: string };
+	type Message = {
+		username: string;
+		icon: string;
+		href: string;
+		text: string;
+		hidden: boolean;
+	};
 	type Listing = { slug: string; label: string };
 
 	// new post form
@@ -16,7 +22,7 @@
 	let pMusic = $state('');
 	let pHidden = $state(false);
 	let messages = $state<Message[]>([
-		{ username: '', icon: '', href: '', text: '' },
+		{ username: '', icon: '', href: '', text: '', hidden: false },
 	]);
 
 	// new user form
@@ -70,7 +76,13 @@
 	});
 
 	function addMessage() {
-		messages.push({ username: '', icon: '', href: '', text: '' });
+		messages.push({
+			username: '',
+			icon: '',
+			href: '',
+			text: '',
+			hidden: false,
+		});
 	}
 	function removeMessage(i: number) {
 		messages.splice(i, 1);
@@ -96,6 +108,7 @@
 					icon: m.icon || undefined,
 					href: m.href || undefined,
 					text: m.text,
+					hidden: m.hidden || undefined,
 				})),
 		};
 		try {
@@ -115,7 +128,9 @@
 			pMusic = '';
 			pHidden = false;
 			pSlugTouched = false;
-			messages = [{ username: '', icon: '', href: '', text: '' }];
+			messages = [
+				{ username: '', icon: '', href: '', text: '', hidden: false },
+			];
 			await refresh();
 		} catch (e) {
 			flash('', String(e));
@@ -253,6 +268,10 @@
 					</label>
 					<label>
 						text<textarea bind:value={msg.text} rows="2"></textarea>
+					</label>
+					<label class="row">
+						<input type="checkbox" bind:checked={msg.hidden} />
+						hidden (revealed through the magnifier)
 					</label>
 					{#if messages.length > 1}
 						<button

@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { lightsOn, playerPlaying } from '$lib/stores';
+	import { get } from 'svelte/store';
+	import { lightsOn, playerPlaying, playerVolume } from '$lib/stores';
+
+	// same volume curve as the music player, so the intro tracks the slider
+	function curve(v: number) {
+		return Math.max(0, Math.pow(0.01, 1 - v) - 0.01);
+	}
 
 	// rope physics for the lightswitch
 
@@ -86,6 +92,7 @@
 					.webkitAudioContext;
 			const ctx = new AudioCtx();
 			const click = new Audio('/sounds/switch.mp3');
+			click.volume = curve(get(playerVolume));
 			const src = ctx.createMediaElementSource(click);
 			const pan = ctx.createStereoPanner();
 			pan.pan.value = -0.1; // slightly left
@@ -160,7 +167,7 @@
 			const restY = anchorY + restLength;
 			const pull = (bead().y - restY) / PULL_TRIGGER;
 			const p = Math.max(0, Math.min(1, pull));
-			target = p * p * BED_MAX_VOL; // slow start then swell
+			target = p * p * BED_MAX_VOL * curve(get(playerVolume)); // slow start then swell
 		}
 		const tau = pulling ? 0.12 : 0.04;
 		masterGain.gain.setTargetAtTime(target, audioCtx.currentTime, tau);
@@ -224,6 +231,7 @@
 		// start room tone
 		roomAudio = new Audio('/sounds/room.mp3');
 		roomAudio.loop = true;
+		roomAudio.volume = curve(get(playerVolume));
 		const startRoom = () => {
 			roomAudio?.play().catch(() => {});
 		};

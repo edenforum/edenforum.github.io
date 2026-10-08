@@ -32,7 +32,7 @@ export const scenes: Scene[] = [
 		aspect: 4 / 3,
 		ambient: '/sounds/scene1.mp3',
 		hotspots: [
-			{ x: 41, y: 28, w: 10, h: 20, label: 'home', to: 'scene-2', sound: '/sounds/footsteps.mp3'},
+			{ x: 45, y: 30, w: 10, h: 20, label: 'home', to: 'scene-2', sound: '/sounds/footsteps.mp3'},
 
 		]
 	},
@@ -44,7 +44,7 @@ export const scenes: Scene[] = [
 		ambient: '/sounds/scene2.mp3',
 		hotspots: [
 			{ x: 0, y: 93, w: 100, h: 8, label: 'go back', to: 'scene-1', sound: '/sounds/footsteps.mp3'},
-			{ x: 35, y: 29, w: 30, h: 60, label: 'the door', code: 'vnn', to: 'scene-3' },
+			{ x: 35, y: 29, w: 30, h: 60, label: 'the door', code: 'vnvn', to: 'scene-3' },
 		]
 	},
 	{
@@ -55,6 +55,18 @@ export const scenes: Scene[] = [
 		ambient: '/sounds/scene3.mp3',
 		hotspots: [
 			{ x: 0, y: 93, w: 100, h: 8, label: 'go back', to: 'scene-2'},
+			{ x: 32, y: 22, w: 40, h: 50, label: 'the balcony', to: 'scene-4'},
+
+		]
+	},
+		{
+		id: 'scene-4',
+		image: '/home2/scene-4.png',
+		alt: 'room 4',
+		aspect: 4 / 3,
+		ambient: '/sounds/scene3.mp3',
+		hotspots: [
+			{ x: 35, y: 46, w: 17, h: 25, label: 'go back', to: 'scene-3'},
 		]
 	}
 ];

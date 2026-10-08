@@ -99,7 +99,7 @@
 	</ul>
 </nav>
 
-<main>
+<main class:no-shadow={$page.url.pathname === '/home2'}>
 	{#if $page.url.pathname !== '/home2'}
 		<div class="time" style="opacity:0.25;transform:translateX(-2rem);">
 			the date and time is: {time3}...
@@ -155,6 +155,11 @@
 
 	main {
 		filter: drop-shadow(15px 15px 7px #a968996e);
+	}
+
+	/* the explore scene fills the frame, no drop shadow needed */
+	main.no-shadow {
+		filter: none;
 	}
 
 	ul {

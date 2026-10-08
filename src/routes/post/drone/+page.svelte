@@ -30,5 +30,5 @@
 <Post username="megaman49" userIcon="/icons/megaman.png" userHref="/user/megaman49">Lol, Kinda sounds like the Mega Man 2 Ending Theme or like Pokemon or something</Post>
 <Post username="frejacat" userIcon="/icons/frejacat.jpg" userHref="/user/frejacat">wow i just listened to it, lovely stuff in there :3</Post>
 <Post username="rainbowguy" userIcon="/icons/rainbowguy.gif" userHref="/user/rainbowguy" class="rainbow">My Text Looks So Cool On This Page. Also How Did You Make It Look Like That.</Post>
-<Post username="edenforum" userIcon="/icons/edenforumpfp.png" userHref="/user/edenforum">haha thanks guys im glad u like it!! also thats my little scret rainbowguy. dont worry about it.</Post>
+<Post username="edenforum" userIcon="/icons/edenforumpfp.png" userHref="/user/edenforum">haha thanks guys im glad u like it!! also thats my little secret, rainbowguy... dont worry about it.</Post>
 <Post username="rainbowguy" userIcon="/icons/rainbowguy.gif" userHref="/user/rainbowguy" class="rainbow">Man</Post>

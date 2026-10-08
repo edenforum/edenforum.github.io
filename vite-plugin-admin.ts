@@ -14,6 +14,7 @@ interface Message {
 	icon?: string;
 	href?: string;
 	text: string;
+	hidden?: boolean;
 }
 
 interface PostBody {
@@ -77,6 +78,9 @@ function renderPost(b: PostBody): string {
 			}
 			if (m.href) {
 				attrs.push(`userHref="${escAttr(m.href)}"`);
+			}
+			if (m.hidden) {
+				attrs.push('hidden');
 			}
 			return `<Post ${attrs.join(' ')}>${escText(m.text)}</Post>`;
 		})

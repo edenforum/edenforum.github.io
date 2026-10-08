@@ -12,5 +12,6 @@
 </Profile>
 
 <Section>
-	<p>this user has no pinned posts</p>
+	<p>this user has 1 pinned post!<br><br><a href="/post/drone">'drone' OUT NOW!</a></p>
 </Section>
+

@@ -48,9 +48,37 @@ function persistentWritable<T>(key: string, initialValue: T) {
 	return storageWritable(key, initialValue, () => localStorage);
 }
 
-// only for this browser session, survives reloads but resets on a new visit
+// Storage-like view over session cookies: shared across every tab of the
+// browser session, but dropped when the browser closes
+function sessionCookieStorage(): Storage {
+	return {
+		get length() {
+			return 0;
+		},
+		clear() {},
+		getItem(key: string) {
+			const match = document.cookie
+				.split('; ')
+				.find((row) => row.startsWith(`${key}=`));
+			return match ? decodeURIComponent(match.slice(key.length + 1)) : null;
+		},
+		key() {
+			return null;
+		},
+		removeItem(key: string) {
+			document.cookie = `${key}=; path=/; Max-Age=0`;
+		},
+		setItem(key: string, value: string) {
+			// no Max-Age/Expires makes this a session cookie
+			document.cookie = `${key}=${encodeURIComponent(value)}; path=/; SameSite=Lax`;
+		},
+	};
+}
+
+// only for this browser session, shared across tabs (unlike sessionStorage)
+// and cleared when the browser closes
 function sessionWritable<T>(key: string, initialValue: T) {
-	return storageWritable(key, initialValue, () => sessionStorage);
+	return storageWritable(key, initialValue, () => sessionCookieStorage());
 }
 
 export const allPosts = writable<Record<string, Post>>({});
