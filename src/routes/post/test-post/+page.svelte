@@ -4,8 +4,8 @@
 
 	export const meta = {
 		title: 'test post',
-		author: 'user 1',
-		date: '10/20/2024 | 13:37',
+		author: 'user1',
+		date: '02/05/2001 | 13:37',
 		comments: '3',
 		// only visible through the magnifying glass
 		hidden: true,

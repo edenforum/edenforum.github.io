@@ -18,5 +18,7 @@
 	playerTrack.set('/sounds/weatherchannel.mp3');
 </script>
 
-<Post username="user1" userIcon="/icons/user1.png" userHref="/user/user1">WELCOME TO EDENFORUM!!! i was sick of using the Other one so we're moving over here. i just hope people actually use it. </Post>
+<Post username="user1" userIcon="/icons/user1.png" userHref="/user/user1">WELCOME TO EDENFORUM!!! i have big big plans for this website! i just hope people actually use it </Post>
 <Post username="megaman49" userIcon="/icons/megaman.png" userHref="/user/megaman49">HIIIII!!!!!!!!</Post>
+<Post username="rainbowguy" userIcon="/icons/rainbowguy.gif" userHref="/user/rainbowguy" class="rainbow">Lol And Then The Owner Vanished For Like 24 Years</Post>
+<Post username="user1" userIcon="/icons/user1.png" userHref="/user/user1" hidden={true}>please help me</Post>

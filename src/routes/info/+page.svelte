@@ -34,8 +34,8 @@
 	<br>
 	<p>TODO:</p>
 	<p>- fix grabbable info button. i dont even know how that happens.</p>
-	<p>- knock knock knock.....</p>
-	<p>- add a way to actually login without having to ask me personally.</p>
+	<p>- knock knock knock knock knock.....</p>
+	<p>- add a way to actually sign up without having to ask me personally.</p>
 	</div>
 </Section>
 
