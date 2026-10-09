@@ -51,6 +51,8 @@
 	<p>- fix grabbable info button. i dont even know how that happens.</p>
 	<p>- knock knock knock knock knock.....</p>
 	<p>- add a way to actually sign up without having to ask me personally.</p>
+	<br>
+	<p> Eden Cooper, landosmusicmgmt@gmail.com </p>
 	</div>
 </Section>
 
