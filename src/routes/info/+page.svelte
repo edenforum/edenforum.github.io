@@ -52,7 +52,7 @@
 	<p>- knock knock knock knock knock.....</p>
 	<p>- add a way to actually sign up without having to ask me personally.</p>
 	<br>
-	<p> Eden Cooper, landosmusicmgmt@gmail.com </p>
+	<p> contact at mail@edenforum.com </p>
 	</div>
 </Section>
 
