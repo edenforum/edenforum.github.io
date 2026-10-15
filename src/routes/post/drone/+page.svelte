@@ -6,7 +6,7 @@
 		title: '\'drone\' OUT NOW',
 		author: 'edenforum',
 		date: '10/10/2026 | 00:00',
-		comments: '6',
+		comments: '9',
 		hidden: false,
 	} satisfies PostMeta;
 </script>
@@ -32,3 +32,5 @@
 <Post username="rainbowguy" userIcon="/icons/rainbowguy.gif" userHref="/user/rainbowguy" class="rainbow">My Text Looks So Cool On This Page. Also How Did You Make It Look Like That.</Post>
 <Post username="edenforum" userIcon="/icons/edenforumpfp.png" userHref="/user/edenforum">haha thanks guys im glad u like it!! also thats my little secret, rainbowguy... dont worry about it.</Post>
 <Post username="rainbowguy" userIcon="/icons/rainbowguy.gif" userHref="/user/rainbowguy" class="rainbow">Man</Post>
+<Post username="crest240p" userIcon="/icons/crest.gif" userHref="/user/crest240p">i like it!!!</Post>
+<Post username="hugewetseal" userIcon="/icons/SEAL.png" userHref="/user/hugewetseal">are there fish here...</Post>
